@@ -3,8 +3,8 @@
 A small sample project demonstrating the different ways you can use Mocha, Chai, and SuperTest to test your Loopback API.
 
 ## Dependencies
-[Mocha](https://mochajs.org/) - `npm install -g mocha`
-[Loopback](http://loopback.io) - `npm install -g strongloop`
+- [Mocha](https://mochajs.org/): `npm install -g mocha`
+- [Loopback](http://loopback.io): `npm install -g strongloop`
 
 ## Usage
 - Run `npm install` from the root of the directory
