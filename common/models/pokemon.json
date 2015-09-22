@@ -1,0 +1,30 @@
+{
+  "name": "pokemon",
+  "plural": "pokemon",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "color": {
+      "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "geopoint"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
