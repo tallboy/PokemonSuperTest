@@ -1,24 +1,24 @@
 'use strict';
 
-var should = require('chai').should();
-var expect = require('chai').expect;
-var supertest = require('supertest-as-promised');
-var app = require('../server/server.js');
+const should = require('chai').should();
+const expect = require('chai').expect;
+const supertest = require('supertest-as-promised');
+const app = require('../server/server.js');
 
-describe('Pokemon', function() {
+describe('Pokemon', () => {
 
   // APP TEST
-  it('should create a pokemon', function(done) {
+  it('should create a pokemon', (done) => {
 
-    var payload = {
+    const payload = {
       name: 'Squirtle',
       type: 'water',
       color: 'blue'
     };
 
     //With the core app test we get the right type
-    var Pokemon = app.models.Pokemon;
-    Pokemon.create(payload, function(err, pokemonInstance) {
+    const Pokemon = app.models.Pokemon;
+    Pokemon.create(payload, (err, pokemonInstance) => {
       expect(!err);
       console.log('Internal Create: ', pokemonInstance);
       expect(pokemonInstance.name).to.equal('Squirtle');
@@ -28,32 +28,32 @@ describe('Pokemon', function() {
   });
 
   // API TEST
-  it('should create a pokemon using the API', function(done) {
-    var payload = {
+  it('should create a pokemon using the API', (done) => {
+    const payload = {
       name: 'Squirtle',
       type: 'water',
       color: 'blue'
     };
 
-    var request = supertest(app);
+    let request = supertest(app);
     request.post('/api/pokemon')
       .type('json')
       .accept('json')
       .send(payload)
       .expect(200)
 
-      .then(function(postResponse) {
+      .then((postResponse) => {
         expect(postResponse.body.name).to.equal('Squirtle');
 
         //POST was successful! Let's make a GET with our new pokemon
         console.log('POST: ', postResponse.body);
-        var pokemonId = postResponse.body.id;
+        const pokemonId = postResponse.body.id;
         return request.get('/api/pokemon/' + pokemonId)
           .type('json')
           .accept('json')
           .expect(200);
 
-      }).then(function(getResponse) {
+      }).then((getResponse) => {
 
         //The API test gives us the wrong type!
         console.log('GET: ', getResponse.body);
@@ -62,8 +62,11 @@ describe('Pokemon', function() {
         done();
       }).catch(function(err) {
         // Catch errors here
-        console.log('ERR', err);
-        if (err) done(err);
+
+        if (err) {
+          console.log('ERR', err);
+          done(err);
+        }
       });
   });
 
